@@ -14,8 +14,12 @@ assert -z "$(log.info 'info')"
 log_logger='log.logger.STDOUT'
 assert "$(log.info 'info')" == "info"
 
-file="$(mktemp)"
-trap "rm ${file}" EXIT INT TERM
-log_logger="log.logger.FILES ${file}"
+file1="$(mktemp)"
+file2="$(mktemp)"
+trap "rm ${file1} ${file2}" EXIT INT TERM
+log_logger="log.logger.FILES ${file1} ${file2}"
 assert -z "$(log.info 'info')"
-assert -f "${file}"
+assert "$(cat "${file1}")" == 'info'
+assert "$(cat "${file2}")" == 'info'
+assert -f "${file1}"
+assert -f "${file2}"
