@@ -11,6 +11,11 @@ log.logger.STDOUT() {
   echo "${input}"
 }
 
+log.logger.FILES() {
+  read input
+  output=$(echo "${input}" | tee -a "${@}")
+}
+
 log.info() {
-  echo "${@}" | "${log_logger}"
+  echo "${@}" | ${log_logger}
 }
