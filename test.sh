@@ -3,9 +3,11 @@
 parent=${dir}
 dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-. ${dir}/assert/test.sh
-. ${dir}/options/test.sh
-. ${dir}/wait/test.sh
-. ${dir}/log/test.sh
+declare -a tests=($(find */ -name test.sh))
+
+for test in "${tests[@]}"
+do
+  . "${dir}/${test}"
+done
 
 dir=${parent}
