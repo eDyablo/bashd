@@ -16,4 +16,5 @@ assert 0 -ge -1
 assert 'a' == 'a'
 assert 'a' != 'b'
 
+assert ! 'a' != 'a'
 assert ! 'a' == 'b'
